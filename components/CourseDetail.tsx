@@ -19,6 +19,7 @@ function CourseDetail(props: { id: string }) {
     query CourseById($id: ID!) {
         CourseById(id: $id) {
             title
+            slug
             courseGroup {
                 description
                 asset
@@ -41,7 +42,7 @@ function CourseDetail(props: { id: string }) {
         button = <h1
             className='bg-gray-400 rounded-lg w-full mt-8 text-center hover:bg-gray-300 border-2 cursor-pointer text-xl'
             onClick={() => {
-                location.href = "https://anticoregular.thoughtindustries.com/learn/history-of-orlando"
+                location.href = `https://anticoregular.thoughtindustries.com/learn/${course?.slug}`
             }}>
                 Start Course
         </h1>
