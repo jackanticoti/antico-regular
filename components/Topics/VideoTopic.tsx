@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
+import ReactPlayer from 'react-player'
 
 interface Variant {
     label: String;
@@ -79,6 +80,7 @@ function VideoTopic(props: { id: string }) {
                 { selection }
             </div>
             <div>
+                <ReactPlayer url={`https://getleda.wistia.com/medias/${wistiaId}`}/>
                 { article }
             </div>
         </div>
