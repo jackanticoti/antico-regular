@@ -22,22 +22,26 @@ function Video(props: { id: string }) {
         }    
     }`
 
-    const { data } = useQuery(course_query, {
+    const { data, error } = useQuery(course_query, {
         variables: { id: props.id }
     });
 
-    let videoTopic
+    let content
 
     if (data) { 
         console.log(data.CourseById)
         console.log(data.CourseById.sections[0].lessons[0])
-        videoTopic = <VideoTopic id={data.CourseById.sections[0].lessons[0].topics[0].id}/>
-    }    
+        content = <VideoTopic id={data.CourseById.sections[0].lessons[0].topics[0].id}/>
+    }
+    
+    if (error) {
+        content = <h1>User does not have access</h1>
+    }
 
     return (
         <div>
             <NavBar/>
-            { videoTopic }
+            { content }
             <Footer/>
         </div>
     );

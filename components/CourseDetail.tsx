@@ -1,48 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
-import { Course } from '@thoughtindustries/content/src/graphql/global-types';
+import { Course, Content } from '@thoughtindustries/content/src/graphql/global-types';
 import { usePageContext } from '../renderer/usePageContext';
 import NavBar from './Navigation/NavBar';
 import Footer from './Footer/Footer';
-
-// This is the course detail page
 
 function CourseDetail(props: { id: string }) {
 
     const pageContext = usePageContext();
     const { currentUser } = pageContext;
 
-    const [course, setCourse] = useState<Course>();
+    const [content, setContent] = useState<Content>();
     const [email, setEmail] = useState("");
+    const [access, setAccess] = useState(false)
 
     const course_query = gql`
-    query CourseById($id: ID!) {
-        CourseById(id: $id) {
+    {
+        CatalogContent(page: 1) {
+          contentItems {
             title
+            displayCourse
+            description
+            asset
             slug
-            courseGroup {
-                description
-                asset
-            }
-        }    
+          }
+        }
+        UserContentItems {
+            id
+        }
     }`
 
-    const { data } = useQuery(course_query, {
-        variables: { id: props.id }
-    });
+    const { data, error } = useQuery(course_query);
 
     useEffect(() => {
         if (data) { 
-            setCourse(data.CourseById)
+            let contentItems: Content[] = data.CatalogContent.contentItems
+            for (let i = 0; i < contentItems.length; i++) {
+                if (contentItems[i].displayCourse == props.id) {
+                    setContent(contentItems[i])
+                }
+            }
+            let userContent: Content[] = data.UserContentItems
+            for (let i = 0; i < userContent.length; i++) {
+                if (userContent[i].id == props.id) {
+                    setAccess(true)
+                }
+            }
         }
     })
 
     let button;
-    if (currentUser?.firstName) {
+    if (access) {
         button = <h1
             className='bg-gray-400 rounded-lg w-full mt-8 text-center hover:bg-gray-300 border-2 cursor-pointer text-xl'
             onClick={() => {
-                location.href = `https://anticoregular.thoughtindustries.com/learn/${course?.slug}`
+                location.href = `https://anticoregular.thoughtindustries.com/learn/${content?.slug}`
             }}>
                 Start Course
         </h1>
@@ -73,9 +85,9 @@ function CourseDetail(props: { id: string }) {
             <NavBar/>
             <div className='flex flex-row justify-between'>
                 <div className='ml-10 mt-8'>
-                    <h1 className='t text-3xl'>{course?.title}</h1>
-                    <h1>{course?.courseGroup?.description}</h1>
-                    <img className='h-96' src={course?.courseGroup?.asset}></img>
+                    <h1 className='t text-3xl'>{content?.title}</h1>
+                    <h1>{content?.description}</h1>
+                    <img className='h-96' src={content?.asset}></img>
                 </div>
                 <div className='mr-10 mt-10'>
                     { button }
