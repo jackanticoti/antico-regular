@@ -7,6 +7,7 @@ interface Variant {
     title: String;
     subtitle: String;
     body: String;
+    copyright: String;
 }
 
 function VideoTopic(props: { id: string }) {
@@ -46,7 +47,8 @@ function VideoTopic(props: { id: string }) {
                     label: data.Pages[0].languages[i].label,
                     title: data.Pages[0].languages[i].title,
                     subtitle: data.Pages[0].languages[i].subtitle,
-                    body: data.Pages[0].languages[i].body
+                    body: data.Pages[0].languages[i].body,
+                    copyright: data.Pages[0].languages[i].copyright
                 }
                 newVariants.push(newVariant)
             }
@@ -68,18 +70,20 @@ function VideoTopic(props: { id: string }) {
 
     let article
     if (variants.length > 0) {
-        article = <div className='w-2/3'>
-            <h1> {variants[index].title} </h1>
-            <h1> {variants[index].body} </h1>
+        article = <div className='mt-10'>
+            <h1 className='text-2xl'> {variants[index].title} </h1>
+            <h1> {variants[index].body.replace(/<[^>]+>/g, '')} </h1>
+            <h1 className='mt-5'>ⓒ {variants[index].copyright.replace(/<[^>]+>/g, '')}</h1>
+
         </div>
     }
 
     return (
         <div className='flex flex-row my-10'>
-            <div className='w-1/3 ml-10'>
+            <div className='w-1/4 ml-10'>
                 { selection }
             </div>
-            <div>
+            <div className='w-3/4 mr-24'>
                 <ReactPlayer url={`https://getleda.wistia.com/medias/${wistiaId}`}/>
                 { article }
             </div>
