@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 
 interface Variant {
-    label: String;
-    title: String;
-    subtitle: String;
-    body: String;
+    label: string;
+    title: string;
+    subtitle: string;
+    body: string; 
+    audioAssetUrl: string;
 }
 
 function Article(props: { id: string }) {
@@ -24,6 +25,7 @@ function Article(props: { id: string }) {
                     subtitle
                     body
                     copyright
+                    audioAssetUrl
                 }
             }
         }
@@ -42,7 +44,8 @@ function Article(props: { id: string }) {
                     label: data.Pages[0].languages[i].label,
                     title: data.Pages[0].languages[i].title,
                     subtitle: data.Pages[0].languages[i].subtitle,
-                    body: data.Pages[0].languages[i].body
+                    body: data.Pages[0].languages[i].body,
+                    audioAssetUrl: data.Pages[0].languages[i].audioAssetUrl
                 }
                 newVariants.push(newVariant)
             }
@@ -64,15 +67,25 @@ function Article(props: { id: string }) {
 
     let article
     if (variants.length > 0) {
-        article = <div className='w-2/3'>
-            <h1> {variants[index].title} </h1>
-            <h1> {variants[index].body} </h1>
+        let audioPlayer;
+        if (variants[index].audioAssetUrl) {
+            audioPlayer = <audio controls>
+                <source src={variants[index].audioAssetUrl} type="audio/mpeg"/>
+                Your browser does not support the audio element.
+            </audio>
+        }
+        article = <div className='w-3/4 mr-32'>
+            <div className='flex flex-row justify-between'>
+                <h1 className='text-4xl'> {variants[index].title} </h1>
+                {audioPlayer}
+            </div>
+            <h1 className='text-xl mt-10'> {variants[index].body.replace(/<[^>]+>/g, '')} </h1>
         </div>
     }
 
     return (
         <div className='flex flex-row my-10'>
-            <div className='w-1/3 ml-10'>
+            <div className='w-1/4 ml-10'>
                 { selection }
             </div>
             { article }

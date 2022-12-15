@@ -3,11 +3,15 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 import NavBar from '../Navigation/NavBar';
 import Footer from '../Footer/Footer';
 import { VideoTopic } from '../Topics/VideoTopic';
+import { Content } from '@thoughtindustries/content/src/graphql/global-types';
 
 function Video(props: { id: string }) {
 
     const course_query = gql`
     query CourseById($id: ID!) {
+        UserContentItems {
+            id
+        }
         CourseById(id: $id) {
             title
             sections {
@@ -22,20 +26,19 @@ function Video(props: { id: string }) {
         }    
     }`
 
-    const { data, error } = useQuery(course_query, {
+    const { data } = useQuery(course_query, {
         variables: { id: props.id }
     });
 
-    let content
+    let content = <h1>Page not found</h1>
 
     if (data) { 
-        console.log(data.CourseById)
-        console.log(data.CourseById.sections[0].lessons[0])
-        content = <VideoTopic id={data.CourseById.sections[0].lessons[0].topics[0].id}/>
-    }
-    
-    if (error) {
-        content = <h1>User does not have access</h1>
+        let contentItems: Content[] = data.UserContentItems
+        for (let i = 0; i < contentItems.length; i++) {
+            if (contentItems[i].id == props.id) {
+                content = <VideoTopic id={data.CourseById.sections[0].lessons[0].topics[0].id}/>
+            }
+        }
     }
 
     return (
