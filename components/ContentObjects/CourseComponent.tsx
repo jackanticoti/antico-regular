@@ -20,6 +20,9 @@ function CourseComponent(props: { id: string }) {
 
     const course_query = gql`
     query CourseById($id: ID!) {
+        UserContentItems {
+            id
+        }
         CourseById(id: $id) {
             courseGroup {
                 asset
@@ -75,6 +78,7 @@ function CourseComponent(props: { id: string }) {
 
     useEffect(() => {
         if (data) {
+            console.log(data)
             setCourse(data.CourseById)
             let contentItems: Content[] = data.UserContentItems
             for (let i = 0; i < contentItems.length; i++) {

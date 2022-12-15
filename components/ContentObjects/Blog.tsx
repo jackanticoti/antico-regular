@@ -33,8 +33,11 @@ function Blog(props: { id: string }) {
     });
 
     let content = <h1>Page not found</h1>
+    let article
 
+    // this isn't great vaidation but there is currently a bug
     if (data) { 
+        article = <Article id={data.CourseById.sections[0].lessons[0].topics[0].id}/>
         let contentItems: Content[] = data.UserContentItems
         for (let i = 0; i < contentItems.length; i++) {
             if (contentItems[i].id == props.id) {
@@ -46,7 +49,7 @@ function Blog(props: { id: string }) {
     return (
         <div>
             <NavBar/>
-            { content }
+            {article}
             <Footer/>
         </div>
     );

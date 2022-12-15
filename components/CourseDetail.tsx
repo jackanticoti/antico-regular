@@ -40,17 +40,18 @@ function CourseDetail(props: { id: string }) {
                     setContent(contentItems[i])
                 }
             }
-            let userContent: Content[] = data.UserContentItems
-            for (let i = 0; i < userContent.length; i++) {
-                if (userContent[i].id == props.id) {
-                    setAccess(true)
-                }
-            }
+            // let userContent: Content[] = data.UserContentItems
+            // for (let i = 0; i < userContent.length; i++) {
+            //     if (userContent[i].id == props.id) {
+            //         setAccess(true)
+            //     }
+            // }
         }
     })
 
     let button;
-    if (access) {
+    // this isn't great authentication but there is a bug with UserContentItems
+    if (currentUser?.firstName) {
         button = <h1
             className='bg-gray-400 rounded-lg w-full mt-8 text-center hover:bg-gray-300 border-2 cursor-pointer text-xl'
             onClick={() => {
