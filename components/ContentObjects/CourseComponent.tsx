@@ -4,6 +4,7 @@ import NavBar from '../Navigation/NavBar';
 import Footer from '../Footer/Footer';
 import { Lesson, Section, Course } from '@thoughtindustries/content/src/graphql/global-types';
 import { Content } from '@thoughtindustries/content/src/graphql/global-types';
+import { GeneralTopic } from '../Topics/GeneralTopic'
 
 interface Topic {
     id: String
@@ -15,7 +16,7 @@ function CourseComponent(props: { id: string }) {
     const [access, setAccess] = useState(false)
     const [course, setCourse] = useState<Course>();
     const [pageIndex, setPageIndex] = useState(0);
-    const [selectedPage, setSelectedPage] = useState<String>("641a8013-4213-49be-9783-60ccff32e85a");
+    const [selectedPage, setSelectedPage] = useState<string>("641a8013-4213-49be-9783-60ccff32e85a");
     const [topics, setTopics] = useState<Topic[]>([])
 
     const course_query = gql`
@@ -131,7 +132,7 @@ function CourseComponent(props: { id: string }) {
                     </div>
                 </div>
                 <div className='w-full h-full flex flex-col justify-between'>
-                    {/* <GeneralPage id={selectedPage}/> */}
+                    <GeneralTopic id={selectedPage}/>
                     <div className='flex flex-row justify-between mb-14'>
                         <h1
                             className='hover:bg-slate-100 bg-slate-400 rounded-lg 
