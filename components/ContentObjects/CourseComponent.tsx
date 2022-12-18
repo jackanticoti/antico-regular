@@ -144,7 +144,8 @@ function CourseComponent(props: { id: string }) {
                             >Last Page</h1>
                         <h1
                             className='hover:bg-slate-100 bg-slate-400 rounded-lg 
-                            m-2 px-3 hover:cursor-pointer w-60 text-lg text-center'
+                            m-2 px-3 hover:cursor-pointer w-60 text-lg text-center
+                            transform transition-all hover:scale-125'
                             onClick={() => {
                                 setSelectedPage(topics[(pageIndex + 1) % topics.length].id)
                                 setPageIndex((pageIndex + 1) % topics.length)

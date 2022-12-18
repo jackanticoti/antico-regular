@@ -31,9 +31,11 @@ function Video(props: { id: string }) {
     });
 
     let content = <h1>Page not found</h1>
+    let vid
 
     if (data) { 
         let contentItems: Content[] = data.UserContentItems
+        vid = <VideoTopic id={data.CourseById.sections[0].lessons[0].topics[0].id}/>
         for (let i = 0; i < contentItems.length; i++) {
             if (contentItems[i].id == props.id) {
                 content = <VideoTopic id={data.CourseById.sections[0].lessons[0].topics[0].id}/>
@@ -44,7 +46,7 @@ function Video(props: { id: string }) {
     return (
         <div>
             <NavBar/>
-            { content }
+            { vid }
             <Footer/>
         </div>
     );

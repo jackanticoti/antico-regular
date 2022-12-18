@@ -61,7 +61,8 @@ function VideoTopic(props: { id: string }) {
             onClick={() => {
                 setIndex(i)
             }}
-            className={`hover:cursor-pointer my-2 text-xl
+            className={`hover:cursor-pointer my-2 text-xl rounded-lg hover:bg-slate-100 w-48
+            pl-5
             ${i == index ? 'font-bold' : ''}`}
             key={i}>
             {variant.label}
@@ -80,7 +81,7 @@ function VideoTopic(props: { id: string }) {
 
     return (
         <div className='flex flex-row my-10'>
-            <div className='w-1/4 ml-10'>
+            <div className='w-1/4 pl-10'>
                 { selection }
             </div>
             <div className='w-3/4 mr-24'>

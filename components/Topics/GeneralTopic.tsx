@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { TopicType } from '@thoughtindustries/content/src/graphql/global-types';
 import Text from './Text';
+import { Video } from './Video';
 
 const GeneralTopic = (props: { id: string }) => {
 
@@ -14,7 +15,9 @@ const GeneralTopic = (props: { id: string }) => {
                 type
             } ... on QuizPage {
       		    type
-    	    }
+    	    } ... on VideoPage {
+                type
+            }
         }
     }`
 
@@ -33,6 +36,12 @@ const GeneralTopic = (props: { id: string }) => {
     let pageComponent
     if (pageType == TopicType.Text) {
         pageComponent = <Text id={props.id}/>
+    } else if (pageType == TopicType.Quiz) {
+        pageComponent = <h1>Hi I'm Quiz!</h1>
+    } else if (pageType == TopicType.ShareableContentObject) {
+        pageComponent = <h1>Hi I'm a Scorm!</h1>
+    } else if (pageType == TopicType.Video) {
+        pageComponent = <Video id={props.id}/>
     }
 
     return (
