@@ -21,8 +21,8 @@ function Page() {
     <>
       <NavBar />
       <Hero
-        headline="Making Learning Successful"
-        body="Learning is a gateway to success. We aim to provide motivational content, strategies and courses to help you become successful and achieve your goals."
+        headline="Level up learning experiences with Helium"
+        body="Antico Regular provides you with the latest online learning system and material that help you level up."
         buttonUrl="/signin"
         buttonText="Sign in"
       />

@@ -42,7 +42,7 @@ const HeightEqualizerElementWrapper = ({
 };
 
 const ItemTitleBlock = ({ title }: { title: string }) => (
-  <div className="font-semibold text-lg">{title}</div>
+  <div className="font-semibold text-base">{title}</div>
 );
 
 const ItemSourceBlock = ({
@@ -115,7 +115,7 @@ const DisplayTypeResultsGridItem = ({
                   contentTypeLabel={contentTypeLabel}
                   courseStartDate={courseStartDate}
                 />
-                <div className="text-sm text-gray-500">
+                <div className="text-sm text-gray-500 leading-relaxed">
                   {description && limitText(description, 75)}
                 </div>
                 <hr className="my-2" />
