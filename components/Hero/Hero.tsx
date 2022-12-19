@@ -1,23 +1,33 @@
 import React from 'react';
-import HeroImage from '../Assets/HeroImage';
+
 
 const Hero = (props: { headline: string; body: string; buttonUrl: string; buttonText: string }) => {
   return (
     <>
-      <div className="relative h-96 w-full z-0">
-        <div className="absolute h-96 w-full bg-gray-900 opacity-50" />
-        <HeroImage styling="object-cover h-96 w-full" />
-        <div className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-          <div className="text-2xl sm:text-3xl md:text-5xl">{props.headline}</div>
-          <div className="font-bold text-sm sm:text-lg md:text-xl">{props.body}</div>
-          <div className="px-6 py-3 ">
-            <a href={props.buttonUrl}>
-              <button className="bg-blue-900 hover:bg-blue-700 text-white font-bold h-10 w-20 md:h-14 md:w-28 rounded">
-                {props.buttonText}
-              </button>
-            </a>
+    <div className="herogradient w-full pt-16">
+      <section className="max-w-screen-xl px-4 md:px-8 mx-auto">
+       <div className="flex flex-wrap justify-between ">
+          <div className="w-full lg:w-1/2 flex p-16 flex-col justify-center gap-4">
+            <h1 className="text-white text-4xl font-bold mb-4 md:mb-8">{props.headline}</h1>
+
+            <p className="max-w-md text-gray-400 text-sm leading-relaxed">{props.body}</p>
+
+            
+              <a href={props.buttonUrl}>
+                <button className="bg-blue-900 hover:bg-blue-700 text-white font-bold h-10 w-20 md:h-14 md:w-28 rounded">
+                  {props.buttonText}
+                </button>
+              </a>
+            
+          </div>
+
+          <div className="w-full lg:w-1/2 flex">
+            <div className="">
+              <img src="https://d36ai2hkxl16us.cloudfront.net/thoughtindustries/image/upload/v1/course-uploads/26c7b423-83be-46fe-96c7-2df83ccb9d9c/sxj1smre28i2-11.png" loading="lazy" alt="Photo by Kaung Htet" className="w-full h-full object-cover object-center" />
+            </div>
           </div>
         </div>
+      </section>
       </div>
     </>
   );

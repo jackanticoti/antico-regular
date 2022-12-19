@@ -17,8 +17,8 @@ const CallToActionWithLinks = (props: {
 
   return (
     <div className="flex bg-white flex-col px-20 py-24 items-center text-center">
-      <div className="text-4xl font-bold mx-auto ">{props.headline}</div>
-      <div className="text-slate-500 text-xl font-light mx-5">{props.description}</div>
+      <div className="text-xl font-bold mx-auto ">{props.headline}</div>
+      <div className="text-slate-500 text-sm font-light mx-5">{props.description}</div>
       <div className="flex flex-wrap px-28">{linkEl}</div>
     </div>
   );
