@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Footer from '../../components/Footer/Footer';
 import Banner from '../../components/Banner';
 import NavBar from '../../components/Navigation/NavBar';
@@ -14,6 +14,7 @@ const documentProps = {
 };
 
 function Page() {
+
   return (
     <>
       <div className="font-primary">

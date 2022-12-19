@@ -107,6 +107,7 @@ function CourseComponent(props: { id: string }) {
     let topicDisplay = topics.map((topic, i) => {
         return <h1
             className={`hover:cursor-pointer my-2 text-xl
+            transform transition-all hover:scale-110
             ${i == pageIndex ? 'font-bold' : ''}`}
             onClick={() => {
                 setPageIndex(i)
@@ -121,17 +122,17 @@ function CourseComponent(props: { id: string }) {
     return (
         <div className='h-full'>
             <NavBar/>
-            <h1
-                className='text-2xl text-center'>
-                {course?.courseGroup?.title}
-            </h1>
             <div className='flex flex-row h-full'>
-                <div className='mr-10 h-full w-1/3 -mt-10'>
-                    <div className='mt-10 ml-5'> 
+                <div className='mr-10 h-full w-1/3'>
+                    <h1
+                        className='text-2xl text-center mt-5'>
+                        {course?.courseGroup?.title}
+                    </h1>
+                    <div className='mt-2 ml-16'> 
                     { topicDisplay }
                     </div>
                 </div>
-                <div className='w-full h-full flex flex-col justify-between'>
+                <div className='w-full h-full flex flex-col justify-between mt-10'>
                     <GeneralTopic id={selectedPage}/>
                     <div className='flex flex-row justify-between mb-14'>
                         <h1
@@ -144,8 +145,7 @@ function CourseComponent(props: { id: string }) {
                             >Last Page</h1>
                         <h1
                             className='hover:bg-slate-100 bg-slate-400 rounded-lg 
-                            m-2 px-3 hover:cursor-pointer w-60 text-lg text-center
-                            transform transition-all hover:scale-125'
+                            m-2 px-3 hover:cursor-pointer w-60 text-lg text-center'
                             onClick={() => {
                                 setSelectedPage(topics[(pageIndex + 1) % topics.length].id)
                                 setPageIndex((pageIndex + 1) % topics.length)

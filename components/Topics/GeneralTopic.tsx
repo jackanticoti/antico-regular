@@ -3,10 +3,11 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 import { TopicType } from '@thoughtindustries/content/src/graphql/global-types';
 import Text from './Text';
 import { Video } from './Video';
+import { ScormTopic } from './ScormTopic';
 
 const GeneralTopic = (props: { id: string }) => {
 
-    const [pageType, setPageType] = useState<TopicType>()
+    const [pageType, setPageType] = useState<TopicType>() 
 
     const page_query = gql`
     query Pages($identifiers: [String!]!) {
@@ -16,6 +17,9 @@ const GeneralTopic = (props: { id: string }) => {
             } ... on QuizPage {
       		    type
     	    } ... on VideoPage {
+                type
+            }
+            ... on ScormPage {
                 type
             }
         }
@@ -39,7 +43,7 @@ const GeneralTopic = (props: { id: string }) => {
     } else if (pageType == TopicType.Quiz) {
         pageComponent = <h1>Hi I'm Quiz!</h1>
     } else if (pageType == TopicType.ShareableContentObject) {
-        pageComponent = <h1>Hi I'm a Scorm!</h1>
+        pageComponent = <ScormTopic id={props.id}/>
     } else if (pageType == TopicType.Video) {
         pageComponent = <Video id={props.id}/>
     }
