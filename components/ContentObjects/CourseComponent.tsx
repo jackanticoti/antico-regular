@@ -133,7 +133,7 @@ function CourseComponent(props: { id: string }) {
                     </div>
                 </div>
                 <div className='w-full h-full flex flex-col justify-between mt-10'>
-                    <GeneralTopic id={selectedPage}/>
+                    <GeneralTopic course_id={props.id} topic_id={selectedPage}/>
                     <div className='flex flex-row justify-between mb-14'>
                         <h1
                             className='hover:bg-slate-100 bg-slate-400 rounded-lg 
