@@ -15,9 +15,16 @@ a {
   text-decoration: none;
 }
 
-.navitem {
-  padding: 3px 10px;
-}
-.navitem.is-active {
-  background-color: #eee;
+@layer components {
+  /* This won't be included in your compiled CSS unless you actually use it */
+  .herogradient {
+    background-color:hsla(195,68%,28%,1);
+    background-image:
+    radial-gradient(at 87% 84%, hsla(0,74%,35%,0.7) 0px, transparent 50%),
+    radial-gradient(at 83% 47%, hsla(279,96%,17%,1) 0px, transparent 50%),
+    radial-gradient(at 79% 57%, hsla(220,64%,17%,1) 0px, transparent 50%),
+    radial-gradient(at 13% 70%, hsla(238,71%,17%,1) 0px, transparent 50%),
+    radial-gradient(at 49% 31%, hsla(240,92%,17%,1) 0px, transparent 50%),
+    radial-gradient(at 42% 41%, hsla(231,65%,17%,1) 0px, transparent 50%);
+  }
 }

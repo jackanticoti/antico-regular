@@ -11,7 +11,7 @@ const Avatar = (props: { size: string }) => {
   } else if (props.size === 'small') {
     avatarSize = avatarSize = 'h-9 w-9';
   } else {
-    avatarSize = 'h-11 w-11';
+    avatarSize = 'h-8 w-8';
   }
 
   let snippet;
@@ -27,8 +27,8 @@ const Avatar = (props: { size: string }) => {
         const userInitials =
           currentUser?.firstName.split('')[0] + currentUser?.lastName.split('')[0];
         snippet = (
-          <div className={`${avatarSize} bg-slate-50 rounded-full font-bold`}>
-            <div className="p-2.5">{userInitials}</div>
+          <div className={`${avatarSize} bg-slate-50 rounded-full text-sm flex justify-center items-center border `}>
+            <div className="">{userInitials}</div>
           </div>
         );
       }

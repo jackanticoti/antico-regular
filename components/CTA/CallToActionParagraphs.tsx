@@ -27,10 +27,10 @@ const CallToActionParagraphs = (props: {
           <CtaAsset styling="p-4 md:p-8" />
         </div>
         <div className="flex flex-col med:w-1/2">
-          <h2 className="max-w-md font-bold text-left text-2xl md:text-3xl">
+          <h2 className="max-w-md font-bold text-left text-xl">
             {props.item.heading}
           </h2>
-          <div className="max-w-sm text-slate-500 text-left md:text-left pt-6 text-lg">
+          <div className="max-w-sm text-slate-500 text-left md:text-left pt-6 text-sm leading-relaxed">
             {props.item.content}
           </div>
           <a href={props.item.buttonUrl} className="text-blue-900 py-10">
@@ -55,10 +55,10 @@ const CallToActionParagraphs = (props: {
     return (
       <div className="flex flex-col px-4 mx-auto mt-10 mb-10 md:flex-row">
         <div className="flex flex-col med:w-1/2">
-          <h2 className="max-w-md font-bold text-left text-2xl md:text-3xl">
+          <h2 className="max-w-md font-bold text-left text-xl">
             {props.item.heading}
           </h2>
-          <div className="max-w-sm text-slate-500 text-left md:text-left pt-6 text-lg">
+          <div className="max-w-sm text-slate-500 text-left md:text-left pt-6 text-sm leading-relaxed">
             {props.item.content}
           </div>
           <a href={props.item.buttonUrl} className="text-blue-900 py-10">
@@ -85,8 +85,8 @@ const CallToActionParagraphs = (props: {
   return (
     <>
       <div className="flex flex-col pt-16 px-10 pb-20 bg-slate-50">
-        <div className="text-3xl font-bold text-center">{props.heading}</div>
-        <div className="text-slate-500 text-xl font-normal text-center mx-5 pt-6">
+        <div className="text-xl font-bold text-center">{props.heading}</div>
+        <div className="text-slate-500 text-sm font-normal text-center mx-5 pt-6">
           {props.subheading}
         </div>
         {listItems}

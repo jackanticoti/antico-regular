@@ -1,6 +1,5 @@
 import React from 'react';
 import { usePageContext } from '../../renderer/usePageContext';
-import CurrentUserSmallScreenNavBar from './CurrentUserSmallScreenNavBar';
 import CurrentUserNavBar from './CurrentUserNavBar';
 import UserLoginNavBar from './UserLoginNavBar';
 
@@ -13,12 +12,11 @@ const NavBar = () => {
     // signed in
     navbar = (
       <>
-        <div className="block md:hidden">
-          <CurrentUserSmallScreenNavBar />
-        </div>
-        <div className="hidden md:block">
-          <CurrentUserNavBar />
-        </div>
+      <div className="bg-white">
+        <header className="border-b">
+            <CurrentUserNavBar />
+        </header>
+      </div>  
       </>
     );
   } else {
