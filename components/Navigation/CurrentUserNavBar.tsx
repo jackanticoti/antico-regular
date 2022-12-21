@@ -12,7 +12,7 @@ export default function CurrentUserNavBar() {
   return (
   <div className="max-w-screen-xl flex justify-between items-center px-4 md:px-8 mx-auto">
       {/* logo - start*/}
-      <a href="/" className="inline-flex items-center text-black-800 text-lg font-bold gap-2.5" aria-label="logo">
+      <a href="/" className="inline-flex items-center text-black-800 text-base font-bold gap-2.5" aria-label="logo">
       <Logo size=""  />
         Regular
       </a>
@@ -20,9 +20,9 @@ export default function CurrentUserNavBar() {
 
       {/* nav - start*/}
       <nav className="hidden lg:flex gap-12 2xl:ml-16">
-          <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-semibold transition duration-100">Programs</a>
-          <a href="/catalog" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-semibold transition duration-100">Courses</a>
-          <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-semibold transition duration-100">About</a>
+          <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-light transition duration-100">Programs</a>
+          <a href="/catalog" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-light transition duration-100">Courses</a>
+          <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-light transition duration-100">About</a>
       </nav>
       {/* nav - end*/}
 
@@ -43,12 +43,12 @@ export default function CurrentUserNavBar() {
                 </clipPath>
                 </defs>
                 </svg>
-                <span className="hidden sm:block text-gray-500 text-xs font-semibold">Close</span>
+                <span className="hidden sm:block text-gray-500 text-xs font-light">Close</span>
                 </div> : <div className='w-12 sm:w-20 md:w-24 h-12 sm:h-20 md:h-24 flex flex-col justify-center items-center'>
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-gray-800" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
                   </svg>
-                  <span className="hidden sm:block text-gray-500 text-sm font-semibold">menu</span></div>}
+                  <span className="hidden sm:block text-gray-500 text-sm font-light">menu</span></div>}
             </button>
           
         </a>
@@ -60,9 +60,9 @@ export default function CurrentUserNavBar() {
         >
           {/* nav - start*/}
           <nav className="flex flex-col gap-12">
-              <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-semibold transition duration-100">Programs</a>
-              <a href="/catalog" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-semibold transition duration-100">Courses</a>
-              <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-semibold transition duration-100">About</a>
+              <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm  font-light transition duration-100">Programs</a>
+              <a href="/catalog" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm  font-light transition duration-100">Courses</a>
+              <a href="#" className="text-gray-600 hover:text-indigo-500 active:text-indigo-700 text-sm font-light transition duration-100">About</a>
           </nav>
           {/* nav - end*/}
         </div>
@@ -83,8 +83,8 @@ export default function CurrentUserNavBar() {
                 </clipPath>
                 </defs>
                 </svg>
-                <span className="hidden sm:block text-gray-500 text-xs font-semibold">Close</span>
-                </div> : <div className='w-12 sm:w-20 md:w-24 h-12 sm:h-20 md:h-24 flex flex-col justify-center items-center'><Avatar size="" /><span className="hidden sm:block text-gray-500 text-xs font-semibold">Account</span></div>}
+                <span className="hidden sm:block text-gray-500 text-xs font-light">Close</span>
+                </div> : <div className='w-12 sm:w-20 md:w-24 h-12 sm:h-20 md:h-24 flex flex-col justify-center items-center'><Avatar size="" /><span className="hidden sm:block text-gray-500 text-xs font-light">Account</span></div>}
       
             </button>
           
@@ -107,18 +107,18 @@ export default function CurrentUserNavBar() {
               </div>
               <hr></hr>
               <a href="/transcript">
-                <li className="md:hover:bg-white hover:bg-slate-100 rounded pl-2 py-2">
+                <li className="md:hover:bg-white hover:bg-slate-100 rounded pl-2 py-2 font-light">
                   My Transcript
                 </li>
               </a>
               <a href="/support">
-                <li className="md:hover:bg-white hover:bg-slate-100 rounded pl-2 pt-2 pb-4">
+                <li className="md:hover:bg-white hover:bg-slate-100 rounded pl-2 pt-2 pb-4 font-light">
                   Need Support?
                 </li>
               </a>
               <hr></hr>
               <a href="/signout">
-                <div className="text-center pt-5 text-sm text-blue-900 hover:text-blue-700">
+                <div className="text-center pt-5 text-sm text-blue-900 hover:text-blue-700 font-light">
                   Sign out
                 </div>
               </a>
@@ -132,7 +132,7 @@ export default function CurrentUserNavBar() {
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
 
-          <span className="hidden sm:block text-gray-500 text-sm ">Cart</span>
+          <span className="hidden sm:block text-gray-500 text-xs font-light">Cart</span>
         </a>
         
 

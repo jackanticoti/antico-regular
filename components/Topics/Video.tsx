@@ -33,12 +33,13 @@ function Video(props: { id: string }) {
     
 
     return (
-        <div className='flex flex-row'>
-            <div className='w-3/4 mr-24 mb-10'>
-                <h1 className='text-center text-2xl mb-5'>{title}</h1>
-                <ReactPlayer url={`https://getleda.wistia.com/medias/${wistiaId}`}/>
-                {/* <h1>{body}</h1> */}
-            </div>
+        <div className='flex flex-col gap-4'>
+            
+                <h1 className='text-2xl font-sans font-bold text-textPrimary-300'>{title}</h1>
+                <div className='w-full h-0 relative pt-[56.25%]'>
+                <ReactPlayer width={"100%"} height={"100%"} className=" absolute top-0 left-0" url={`https://getleda.wistia.com/medias/${wistiaId}`}/>
+                </div>
+            
         </div>
     );
 }

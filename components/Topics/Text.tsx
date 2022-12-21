@@ -32,9 +32,9 @@ const Text = (props: { id: string }) => {
     
 
     return (
-        <div>
-            <h1 className='text-xl'>{title}</h1>
-            <h1 className='mx-5'>{body.replace(/<[^>]+>/g, '')}</h1>
+        <div className='grid gap-4'>
+            <h1 className='text-2xl font-sans font-bold text-textPrimary-300'>{title}</h1>
+            <p className='text-sm leading-loose text-textPrimary-200'>{body.replace(/<[^>]+>/g, '')}</p>
         </div>
     );
 };

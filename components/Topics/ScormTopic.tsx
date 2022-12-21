@@ -49,13 +49,16 @@ function ScormTopic(props: { id: string }) {
     }) 
 
     return (
-        <div className='flex flex-row my-10'>
-            <h1
-                className='bg-gray-400 text-2xl p-4 rounded-lg w-72 h-32 hover:bg-gray-100 border-2 cursor-pointer'
+        <div className='flex flex-col gap-4 '>
+            <h1 className='text-2xl font-sans font-bold text-textPrimary-300'>SCORM content</h1>
+            <button
+                className="text-white bg-indigo-700 hover:bg-indigo-600 inline-block font-normal text-sm text-center no-underline py-2 w-1/4 rounded-md disabled:bg-indigo-300 disabled:cursor-default"
                 onClick={() => {
-                    window.open(url, '_blank', 'location=yes,height=570,width=520');
+                  window.open(url, '_blank', 'location=yes,height=570,width=520');
                 }}
-                >Click here to launch your SCORM</h1>
+              >
+                Launch
+              </button>
         </div>
     );
 }

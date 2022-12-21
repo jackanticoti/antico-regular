@@ -88,9 +88,9 @@ function CourseComponent(props: { id: string }) {
                 }
             }
             let newTopics: Topic[] = []
-            data.CourseById.sections.map((section) => {
-                section.lessons.map((lesson) => {
-                    lesson.topics.map((topic) => {
+            data.CourseById.sections.map((section: { lessons: any[]; }) => {
+                section.lessons.map((lesson: { topics: any[]; }) => {
+                    lesson.topics.map((topic: { title: any; id: any; }) => {
                         let newTopic: Topic = {
                             title: topic.title,
                             id: topic.id
@@ -105,56 +105,75 @@ function CourseComponent(props: { id: string }) {
     }, [])
 
     let topicDisplay = topics.map((topic, i) => {
-        return <h1
-            className={`hover:cursor-pointer my-2 text-xl
+        return <p
+            className={`font-sans hover:cursor-pointer my-2 text-xs
             transform transition-all hover:scale-110
-            ${i == pageIndex ? 'font-bold' : ''}`}
+            ${i == pageIndex ? 'font-bold text-brandPrimary-900' : ' '}`}
             onClick={() => {
                 setPageIndex(i)
                 setSelectedPage(topic.id)
             }}
             key={i}>
             {topic.title}
-        </h1>
+        </p>
     })
 
 
     return (
-        <div className='h-full'>
+        <div className='h-full bg-bgDefault-100 '>
             <NavBar/>
-            <div className='flex flex-row h-full'>
-                <div className='mr-10 h-full w-1/3'>
-                    <h1
-                        className='text-2xl text-center mt-5'>
-                        {course?.courseGroup?.title}
-                    </h1>
-                    <div className='mt-2 ml-16'> 
-                    { topicDisplay }
-                    </div>
-                </div>
-                <div className='w-full h-full flex flex-col justify-between mt-10'>
-                    <GeneralTopic id={selectedPage}/>
-                    <div className='flex flex-row justify-between mb-14'>
-                        <h1
-                            className='hover:bg-slate-100 bg-slate-400 rounded-lg 
-                            m-2 px-3 hover:cursor-pointer w-60 text-lg text-center'
-                            onClick={() => {
-                                setSelectedPage(topics[(pageIndex - 1) % topics.length].id)
-                                setPageIndex((pageIndex - 1) % topics.length )
-                            }}
-                            >Last Page</h1>
-                        <h1
-                            className='hover:bg-slate-100 bg-slate-400 rounded-lg 
-                            m-2 px-3 hover:cursor-pointer w-60 text-lg text-center'
-                            onClick={() => {
-                                setSelectedPage(topics[(pageIndex + 1) % topics.length].id)
-                                setPageIndex((pageIndex + 1) % topics.length)
-                            }}
-                            >Next Page</h1>
-                    </div>
-                </div>
+            <div className='max-w-screen-xl min-h-screen grid grid-flow-col-dense rid-rows-2 grid-cols-8 gap-8 py-10 mx-auto px-4 md:px-8'>
+                
+                <nav className='bg-surface-100 rounded shadow-xl col-span-2'>
+                        <div className='p-8 bg-surface-100 border-b border-border-200 grid grid-cols-1 gap-4'>
+                            <a href='/catalog' className='text-xs text-brandPrimary-900'><span className='text-base'>&lsaquo;</span> COURSES</a>
+                            <div className='grid grid-cols-1 gap-2
+                            '>
+                                <h1 className='text-sm font-bold text-textPrimary-300'>
+                                    {course?.courseGroup?.title}
+                                </h1>
+                                <div className='bg-interface-100 rounded-full h-2 relative overflow-hidden '>
+                                    <div className='bg-brandPrimary-900 rounded-full absolute top-0 bottom-0 w-1/4'></div>
+                                </div>
+                                <p className=' text-xs font-sans font-normal text-brandPrimary-900'>25% Complete</p>
+                            </div>
+                        </div>
+                        <div className='p-8 text-textPrimary-200 sticky top-0'> 
+                        { topicDisplay }
+                        </div>          
+                </nav>
+                <main className='p-16 bg-surface-100 shadow-sm rounded col-span-4 '>
+                        <GeneralTopic id={selectedPage}/>
+                </main>
+                <div className='col-start-3 row-start-2 col-span-4 flex flex-row items-center place-content-between sticky bottom-0 h-20 bg-brandPrimary-300 px-8 rounded-b'>
+                    <button className="bg-brandPrimary-600 hover:bg-brandPrimary-900 text-white font-sans font-bold h-10 w-20 md:h-14 md:w-28 rounded" onClick={() => {
+                                    setSelectedPage(topics[(pageIndex - 1) % topics.length].id)
+                                    setPageIndex((pageIndex - 1) % topics.length )
+                                }}>
+                    Prev
+                    </button>
+                    <button className="bg-brandPrimary-600 hover:bg-brandPrimary-900 text-white font-sans font-bold h-10 w-20 md:h-14 md:w-28 rounded" onClick={() => {
+                                    setSelectedPage(topics[(pageIndex + 1) % topics.length].id)
+                                    setPageIndex((pageIndex + 1) % topics.length)
+                                }}>
+                    Next
+                    </button>
+                  
+                </div>        
+                
+                <aside className=' row-start-1 col-span-2 font-sans p-10 sticky top-0'>
+                    <ul className=' text-textPrimary-300 leading-8  font-bold'>
+                        <li className='text-textPrimary-200 font-light '>Tools:</li>
+                        <li className='hover:text-brandPrimary-600'>Resources</li>
+                        <li className='hover:text-brandPrimary-600'>Assignments</li>
+                        <li className='hover:text-brandPrimary-600'>Notes</li>
+                        <li className='hover:text-brandPrimary-600'>Workbooks</li>
+                    </ul>
+                
+                </aside> 
+                   
             </div>
-            <Footer/>
+           
         </div>
     );
 }
