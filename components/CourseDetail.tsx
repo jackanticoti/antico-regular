@@ -52,13 +52,16 @@ function CourseDetail(props: { id: string }) {
     let button;
     // this isn't great authentication but there is a bug with UserContentItems
     if (currentUser?.firstName) {
-        button = <h1
-            className='bg-gray-400 rounded-lg w-full mt-8 text-center hover:bg-gray-300 border-2 cursor-pointer text-xl'
+        button = 
+        
+        <button
+        className="bg-brandPrimary-600 hover:bg-brandPrimary-900 text-white font-sans font-bold h-10 w-full md:h-14 rounded"
             onClick={() => {
                 location.href = `https://anticoregular.thoughtindustries.com/learn/${content?.slug}`
             }}>
                 Start Course
-        </h1>
+        </button>
+        
     } else {
         button = <div className='my-3 bg-slate-100 p-5'>
             <h1 className='text-2xl'>ENROLL TODAY</h1>
@@ -82,25 +85,29 @@ function CourseDetail(props: { id: string }) {
     }
 
     return (
-        <div>
+        <div className='h-full bg-bgDefault-100'>
             <NavBar/>
-            <div className='flex flex-row justify-between'>
-                <div className='ml-10 mt-8'>
-                    <h1 className='t text-3xl'>{content?.title}</h1>
-                    <h1>{content?.description}</h1>
-                    <img className='h-96' src={content?.asset}></img>
+            <div className='max-w-screen-xl min-h-screen grid grid-flow-col-dense rid-rows-2 grid-cols-8 gap-8 py-10 mx-auto px-4 md:px-8'>
+                <div className='col-span-5  bg-surface-100 shadow-sm rounded'>
+                    
+                    <div className='p-16 w-full'>
+                        <h1 className='text-4xl font-sans font-bold'>{content?.title}</h1>
+                        <p>{content?.description}</p>
+                    </div>
+                    <img className='w-full' src={content?.asset}></img>
                 </div>
-                <div className='mr-10 mt-10'>
+                <div className='p-16 bg-surface-100 rounded shadow-xl col-span-3 flex flex-col gap-8 sticky top-0'>
                     { button }
-                    <div className='mt-10'>
-                        <h1 className='text-xl h-10 border-b-2 border-slate-400'>
+                    
+                    <div className='flex flex-col gap-8 '>
+                        <h1 className='border-b border-border-200 text-textPrimary-300 font-sans font-bold text-xs h-10'>
                             What's Included
                         </h1>
-                        <div className='pl-10 mt-5'>
-                        <h1 className='my-3'>Access your courses anytime, anywhere, with a computer, tablet or smartphone</h1>
-                        <h1 className='my-3'>Videos, quizzes and interactive content designed for a proven learning experience</h1>
-                        <h1 className='my-3'> Unlimited access. Take your courses at your time and pace</h1>
-                        </div>
+                        <ul className=' text-textPrimary-300 leading-8 list-disc'>
+                            <li className='text-textPrimary-200 font-light '>Access your courses anytime, anywhere, with a computer, tablet or smartphone</li>
+                            <li className='text-textPrimary-200 font-light '>Videos, quizzes and interactive content designed for a proven learning experience</li>
+                            <li className='text-textPrimary-200 font-light '>Unlimited access. Take your courses at your time and pace</li>
+                        </ul>
                     </div>
                 </div>
             </div>
