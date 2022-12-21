@@ -13,6 +13,8 @@ type Choice = {
 
 const Quiz = (props: { topic_id: string, course_id: string }) => {
 
+    let x = "hey"
+
     const [title, setTitle] = useState("");
     const [assesmentAttemptId, setAssesmentAttemptId] = useState("");
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -77,7 +79,7 @@ const Quiz = (props: { topic_id: string, course_id: string }) => {
     const update_answer = gql`
     mutation UpdateAssessmentAttempt(
         $activeQuestion: QuestionInput,
-        $assessmentAttempt: AssessmentAttemptInput
+        $assessmentAttempt: AssessmentAttemptInput 
       ) {
         UpdateAssessmentAttempt(
           activeQuestion: $activeQuestion,
