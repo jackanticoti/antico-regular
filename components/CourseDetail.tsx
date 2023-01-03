@@ -87,8 +87,8 @@ function CourseDetail(props: { id: string }) {
     return (
         <div className='h-full bg-bgDefault-100'>
             <NavBar/>
-            <div className='max-w-screen-xl min-h-screen grid grid-flow-col-dense rid-rows-2 grid-cols-8 gap-8 py-10 mx-auto px-4 md:px-8'>
-                <div className='col-span-5  bg-surface-100 shadow-sm rounded'>
+            <div className='max-w-screen-xl min-h-screen grid grid-flow-col-dense rid-rows-2 grid-cols-8 gap-8 py-10 mx-auto px-4 md:px-8 '>
+                <div className='col-span-full  bg-surface-100 shadow-sm rounded md:col-span-5 overflow-hidden'>
                     
                     <div className='p-16 w-full flex flex-col gap-4'>
                         <h1 className='text-4xl font-sans font-bold'>{content?.title}</h1>
@@ -96,7 +96,7 @@ function CourseDetail(props: { id: string }) {
                     </div>
                     <img className='w-full' src={content?.asset}></img>
                 </div>
-                <div className='p-16 bg-surface-100 rounded shadow-xl col-span-3 flex flex-col gap-8 sticky top-0'>
+                <div className='col-span-full p-16 bg-surface-100 rounded shadow-xl flex flex-col gap-8 sticky top-0 md:col-span-3'>
                     { button }
                     
                     <div className='flex flex-col gap-8 '>
