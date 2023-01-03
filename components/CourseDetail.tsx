@@ -90,9 +90,9 @@ function CourseDetail(props: { id: string }) {
             <div className='max-w-screen-xl min-h-screen grid grid-flow-col-dense rid-rows-2 grid-cols-8 gap-8 py-10 mx-auto px-4 md:px-8'>
                 <div className='col-span-5  bg-surface-100 shadow-sm rounded'>
                     
-                    <div className='p-16 w-full'>
+                    <div className='p-16 w-full flex flex-col gap-4'>
                         <h1 className='text-4xl font-sans font-bold'>{content?.title}</h1>
-                        <p>{content?.description}</p>
+                        <p className=' text-textPrimary-200'>{content?.description}</p>
                     </div>
                     <img className='w-full' src={content?.asset}></img>
                 </div>
