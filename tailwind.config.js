@@ -103,6 +103,13 @@ module.exports = {
         'secondary-contrast': '#ffffff',
         'link-hover': '#767676'
       },
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        '16': 'repeat(16, minmax(0, 1fr))',
+
+        // Complex site-specific column configuration
+        'holygrail': '1fr, 3fr, 1fr',
+      },
       fontFamily: {
         primary: [getInstanceSetting('font', 'Inter'), 'Nunito', 'sans-serif'],
         header: [getInstanceSetting('font', 'Roboto Condensed'), 'Nunito', 'sans-serif'],

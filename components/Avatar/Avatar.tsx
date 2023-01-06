@@ -27,8 +27,8 @@ const Avatar = (props: { size: string }) => {
         const userInitials =
           currentUser?.firstName.split('')[0] + currentUser?.lastName.split('')[0];
         snippet = (
-          <div className={`${avatarSize} bg-slate-50 rounded-full text-sm flex justify-center items-center border `}>
-            <div className="">{userInitials}</div>
+          <div className={`${avatarSize} bg-slate-50 rounded-full flex justify-center items-center border border-border-300`}>
+            <div className="text-xs">{userInitials}</div>
           </div>
         );
       }

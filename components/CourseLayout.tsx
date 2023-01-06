@@ -37,7 +37,7 @@ export default function CourseLayout({
   };
 
   return (
-    <div className="h-full bg-gray-100 p-8">
+    <div className="h-full bg-bgDefault-100 p-16">
       <div className="h-full max-w-screen-lg mx-auto bg-white shadow-sm font-primary">
         {title && (
           <div className="p-5 flex justify-center">
