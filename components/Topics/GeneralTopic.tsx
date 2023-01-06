@@ -4,8 +4,9 @@ import { TopicType } from '@thoughtindustries/content/src/graphql/global-types';
 import Text from './Text';
 import { Video } from './Video';
 import { ScormTopic } from './ScormTopic';
+import Quiz from './Quiz';
 
-const GeneralTopic = (props: { id: string }) => {
+const GeneralTopic = (props: { course_id: string, topic_id: string }) => {
 
     const [pageType, setPageType] = useState<TopicType>() 
 
@@ -26,7 +27,7 @@ const GeneralTopic = (props: { id: string }) => {
     }`
 
     const { data, error, loading } = useQuery(page_query, {
-        variables: { identifiers: [props.id] }
+        variables: { identifiers: [props.topic_id] }
     });
 
 
@@ -39,13 +40,13 @@ const GeneralTopic = (props: { id: string }) => {
 
     let pageComponent
     if (pageType == TopicType.Text) {
-        pageComponent = <Text id={props.id}/>
+        pageComponent = <Text id={props.topic_id}/>
     } else if (pageType == TopicType.Quiz) {
-        pageComponent = <h1>Hi I'm Quiz!</h1>
+        pageComponent = <Quiz course_id={props.course_id} topic_id={props.topic_id}/>
     } else if (pageType == TopicType.ShareableContentObject) {
-        pageComponent = <ScormTopic id={props.id}/>
+        pageComponent = <ScormTopic id={props.topic_id}/>
     } else if (pageType == TopicType.Video) {
-        pageComponent = <Video id={props.id}/>
+        pageComponent = <Video id={props.topic_id}/>
     }
 
     return (
