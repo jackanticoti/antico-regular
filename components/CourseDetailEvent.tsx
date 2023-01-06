@@ -4,6 +4,7 @@ import { Course, Meeting } from '@thoughtindustries/content/src/graphql/global-t
 import { usePageContext } from '../renderer/usePageContext';
 import NavBar from './Navigation/NavBar';
 import Footer from './Footer/Footer';
+import { ListDashes, CalendarBlank, Ticket, Heart, Share, ChalkboardTeacher } from "phosphor-react";
 
 // This is the course detail page
 
@@ -56,33 +57,36 @@ function CourseDetailEvent(props: { id: string }) {
 
     let button;
     if (currentUser?.firstName) {
-        button = <h1
-            className='bg-gray-400 rounded-lg w-full mt-8 text-center hover:bg-gray-300 border-2 cursor-pointer text-xl'
-            onClick={() => {
-                location.href = `https://anticoregular.thoughtindustries.com/learn/${course?.slug}`
-            }}>
-                Start Course
-        </h1>
-    } else {
-        button = <div className='my-3 bg-slate-100 p-5'>
-            <h1 className='text-2xl'>ENROLL TODAY</h1>
-            <h1 className='text-sm my-4'>Enter your email address to access this course:</h1>
+        button = <div className=''>
+            <h1 className='text-sm font-sans font-bold text-textPrimary-300'>Event Registration</h1>
+            <p className='text-sm my-4 font-sans font-light text-textPrimary-200'>Enter your email address to access this Event:</p>
             <input
-                className='bg-gray-50 border border-gray-300 w-5/6
-                text-gray-900 text-sm rounded-lg px-2'
+                className='bg-gray-50 border border-gray-300 w-full
+                text-gray-900 text-sm rounded-lg px-4 mb-8 h-14'
                 placeholder='Email Address'
                 type="text"
                 value={email}
                 onChange={e => setEmail(e.target.value)}/>
             <div></div>
-            <h1
-                className=''
+            <button
+                className="bg-brandPrimary-600 hover:bg-brandPrimary-900 text-white font-sans font-bold h-10 w-full md:h-14 rounded"
                 onClick={() => {
                     console.log("You clicked enroll")
                 }}>
-                Submit Email
-            </h1>
+                Enroll Today
+            </button>
         </div>
+        
+    } else {
+        button = <button
+        className="bg-brandPrimary-600 hover:bg-brandPrimary-900 text-white font-sans font-bold h-10 w-full md:h-14 rounded"
+            onClick={() => {
+                location.href = `https://anticoregular.thoughtindustries.com/learn/${course?.slug}`
+            }}>
+                Start Course
+        </button>
+
+        
     }
 
     let sessionSelection
@@ -97,12 +101,14 @@ function CourseDetailEvent(props: { id: string }) {
                 onClick={() => {
                     setIndex(i)
                 }}
-                className={`inline-flex flex-row hover:cursor-pointer hover:bg-slate-200
-                ${index == i ? 'font-bold' : ''}`}
+                className={`'', 
+                ${index == i ? ' bg-interface-300 text-textPrimary-100 rounded-full px-4 py-2' : ' px-4 py-2 hover:bg-slate-200 hover:cursor-pointer rounded-full'}`}
                 key={i}>
-                    <h1 className={'w-60 border-2'}>{session.title}</h1>
+                    <p className={'text-xs font-sans'}>{session.title}</p>
+                    {/*
                     <h1 className='w-36 border-2'>{startPretty}</h1>
                     <h1 className='w-36 border-2'>{endPretty}</h1>
+                    */}
                 </div>
             })
         }
@@ -111,46 +117,72 @@ function CourseDetailEvent(props: { id: string }) {
     let meetings
     if (sessions) {
         meetings = sessions[index].meetings?.map((meeting, i) => {
+            let startDate = new Date(meeting.startDate ?? "")
+            let endDate = new Date(meeting.endDate ?? "")
+            let startPretty = startDate.toLocaleString() + " — " + endDate.toLocaleTimeString()
+
             return <div
-            className='w-60 h-60 bg-slate-100 rounded-lg shadow-lg m-2'
+            className='w-full h-auto bg-surface-100 rounded-lg shadow my-4 p-10'
             key={i}>
-                <h1 className='text-center text-lg'>{meeting.title}</h1>
-                <h1>Start date:</h1>
-                <h1>Instructors: {meeting.instructors?.join(", ")}</h1>
+                
+                
+                <p className=' font-sans font-light text-xs text-sky-700 flex flex-row flex-auto align-middle w-full gap-2'><Ticket size={24} weight="duotone" /> {startPretty}</p>
+                <h2 className='text-base font-sans text-textPrimary-300 font-bold'>{meeting.title}</h2>
+                <p className='text-sm font-sans text-textPrimary-200 font-light leading-relaxed py-4'>{meeting.attendeeInfo}</p>
+                <h3 className='flex flex-row flex-auto align-middle gap-2 text-textPrimary-200'><ChalkboardTeacher size={24} />Instructor <small className='py-1 px-4 bg-sky-200 rounded-full text-textPrimary-300 font-sans font-bold'>{meeting.instructors?.join(", ")}</small></h3>
             </div>
         })
     }
 
     return (
-        <div>
+        <div className='h-full bg-bgDefault-100'>
             <NavBar/>
-            <div className='flex flex-row justify-between'>
-                <div className='ml-10 mt-8 w-2/3'>
-                    <h1 className='t text-3xl'>Meetings</h1>
-                    <div className='flex flex-row flex-wrap'>
-                        { meetings }
+            <div className='max-w-screen-xl min-h-screen grid grid-flow-col-dense rid-rows-2 grid-cols-8 gap-8 py-10 mx-auto px-4 md:px-8 '>
+                <div className='col-span-full  bg-surface-100 shadow-2xl rounded md:col-span-4 overflow-hidden sticky top-0 left-0'>
+                    <div className='p-16 w-full flex flex-col gap-4  '>
+                    <div className='h-10 flex flex-row items-center gap-2 justify-end'>
+                                <Heart size={24} />
+                                <Share size={24} />
+                            </div>
+                        <div className='flex flex-row flex-auto align-middle gap-1 w-fit items-center '>
+                            <Ticket size={40} weight="duotone" />
+                            <h1 className='text-lg font-sans text-textPrimary-300 font-bold w-full'> Events in  Austin</h1>
+                        </div>
+                        <p className='text-sm text-textPrimary-200 font-sans font-light leading-relaxed'>Analytics is the process of examining data to gain insights and inform business decisions. It involves collecting, storing, and analyzing data to understand patterns, trends, and relationships.  </p>
+                        <div className='flex flex-col gap-8 '>
+                        { button }
+                        <h1 className='border-b border-border-200 text-textPrimary-300 font-sans font-bold text-sm h-10'>
+                            Key Concepts included
+                        </h1>
+                        <ul className=' text-textPrimary-300 leading-8 list-disc text-sm ml-4 gap-2 flex flex-col'>
+                            <li className='text-textPrimary-200 font-light '>Analytics can be used to improve a wide range of business processes, including marketing, sales, operations, and customer service.</li>
+                            <li className='text-textPrimary-200 font-light '> With the increasing availability of data and advances in technology, analytics has become an essential tool for organizations of all sizes and industries.</li>
+                            <li className='text-textPrimary-200 font-light '>By using analytics, businesses can make more informed decisions, optimize their operations, and gain a competitive advantage.</li>
+                        </ul>
+                        
+                    </div>
                     </div>
                 </div>
-                <div className='mr-10 mt-10 w-2/3'>
-                    { button }
-                    <div className='mt-4'>
-                        <div className='flex flex-row'>
-                            <h1 className='w-60 border-2'>Title</h1>
-                            <h1 className='w-36 border-2'>Start Date</h1>
-                            <h1 className='w-36 border-2'>End Date</h1>
-                        </div>
-                        { sessionSelection }
-                    </div>
-                    <div className='mt-10'>
-                        <h1 className='text-xl h-10 border-b-2 border-slate-400'>
-                            What's Included
-                        </h1>
-                        <div className='pl-10 mt-5'>
-                        <h1 className='my-3'>Access your courses anytime, anywhere, with a computer, tablet or smartphone</h1>
-                        <h1 className='my-3'>Videos, quizzes and interactive content designed for a proven learning experience</h1>
-                        <h1 className='my-3'> Unlimited access. Take your courses at your time and pace</h1>
+                <div className='col-span-full px-6 flex flex-col gap-8 md:col-span-4'>
+
+                    <div className='flex flex-row'>
+                        <h3 className='flex-auto text-sm font-bold font-sans text-textPrimary-300 '>Upcoming Sessions</h3>
+                        <div className="w-16 h-10 flex flex-auto border rounded-lg overflow-hidden divide-x">
+                            <a href="#" className="w-1/2 flex justify-center items-center gap-1 hover:bg-interface-300 active:bg-gray-200 text-textPrimary-100 bg-interface-300 transition duration-100"><ListDashes size={20} /> List</a>
+                            
+                            <a href="#" className="w-1/2 flex justify-center items-center gap-1 hover:bg-interface-300 hover:text-textPrimary-100 active:bg-gray-200 text-gray-500 bg-surface-100 transition duration-100"><CalendarBlank size={20} />Calendar</a>
                         </div>
                     </div>
+                    <div className=''>
+                        <div className='flex flex-row gap-4'>
+                            {sessionSelection}
+                        </div>
+                        
+                        
+                        { meetings }
+
+                    </div>
+                    
                 </div>
             </div>
             <Footer/>
