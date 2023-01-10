@@ -14,7 +14,15 @@ body {
 a {
   text-decoration: none;
 }
-
+.custom_counter {
+  counter-reset: my-awesome-counter;
+}
+.custom_counter li  {
+  counter-increment: my-awesome-counter;
+}
+.custom_counter li::before  {
+  content: "0" counter(my-awesome-counter);
+}
 @layer components {
   /* This won't be included in your compiled CSS unless you actually use it */
   .herogradient {
@@ -27,4 +35,6 @@ a {
     radial-gradient(at 49% 31%, hsla(240,92%,17%,1) 0px, transparent 50%),
     radial-gradient(at 42% 41%, hsla(231,65%,17%,1) 0px, transparent 50%);
   }
+
+
 }
