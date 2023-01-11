@@ -40,21 +40,19 @@ function CourseDetail(props: { id: string }) {
                     setContent(contentItems[i])
                 }
             }
-            // let userContent: Content[] = data.UserContentItems
-            // for (let i = 0; i < userContent.length; i++) {
-            //     if (userContent[i].id == props.id) {
-            //         setAccess(true)
-            //     }
-            // }
+            let userContent: Content[] = data.UserContentItems
+            for (let i = 0; i < userContent.length; i++) {
+                if (userContent[i].id == props.id) {
+                    setAccess(true)
+                }
+            }
         }
     })
 
     let button;
     // this isn't great authentication but there is a bug with UserContentItems
-    if (currentUser?.firstName) {
-        button = 
-        
-        <button
+    if (access) {
+        button = <button
         className="bg-brandPrimary-600 hover:bg-brandPrimary-900 text-white font-sans font-bold h-10 w-full md:h-14 rounded"
             onClick={() => {
                 location.href = `https://anticoregular.thoughtindustries.com/learn/${content?.slug}`

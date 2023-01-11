@@ -2,23 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 
 type Choice = {
-    value: string;
-    correct: boolean;
-  }
-  
-  type Question = {
-    body: string;
-    choices: Choice[];
-  }
+  value: string;
+  correct: boolean;
+}
+
+type Question = {
+  body: string;
+  choices: Choice[];
+}
 
 const Quiz = (props: { topic_id: string, course_id: string }) => {
-
-    let x = "hey"
 
     const [title, setTitle] = useState("");
     const [assesmentAttemptId, setAssesmentAttemptId] = useState("");
     const [questions, setQuestions] = useState<Question[]>([]);
     const [answers, setAnswers] = useState<Number[]>([]);
+    const [grade, setGrade] = useState<Number>(0);
+    const [submitted, setSubmitted] = useState<Boolean>(false);
 
     const page_query = gql`
     query Pages($identifiers: [String!]!) {
@@ -74,6 +74,14 @@ const Quiz = (props: { topic_id: string, course_id: string }) => {
         if (attempt_data) {
             setAssesmentAttemptId(attempt_data.LoadAssessmentAttemptWithQuestions.id)
         }
+        if (answer_data) {
+          console.log(answer_data)
+          console.log("heya heya!")
+          if (answer_data.UpdateAssessmentAttempt.grade) {
+            setGrade(answer_data.UpdateAssessmentAttempt.grade)
+            setSubmitted(true)
+          }
+        }
     })
 
     const update_answer = gql`
@@ -86,11 +94,11 @@ const Quiz = (props: { topic_id: string, course_id: string }) => {
           assessmentAttempt: $assessmentAttempt
         ) {
             id
+            grade
         }
-    }
-    `
+    }`
 
-    const [updateAnswer, { data, loading, error }] = useMutation(update_answer)
+    const [updateAnswer, { data: answer_data, reset }] = useMutation(update_answer)
 
     let answerItems;
     let questionItems
@@ -131,7 +139,22 @@ const Quiz = (props: { topic_id: string, course_id: string }) => {
         </div>
       })
     }
+
+    let result 
     
+    if (submitted) {
+      result = <div className='absolute h-full w-full bg-slate-300 bg-opacity-90'>
+        <div className='bg-slate-400 rounded-lg w-3/4 m-10'>
+          <h1 className='text-2xl'>Yay you submitted the quiz!</h1>
+          <h1 className='text-xl'>Your grade is: {grade}</h1>
+          <h1>Continue</h1>
+          {/* <h1 onClick={() => {
+            reset()
+            setSubmitted(false)
+          }}>Retry Quiz</h1> */}
+        </div>
+      </div>
+    }
 
     return (
         <div>
@@ -139,11 +162,19 @@ const Quiz = (props: { topic_id: string, course_id: string }) => {
               onClick={() => console.log(questions)}
               className='text-xl'
               >{title}</h1>
+              {result}
               { questionItems }
             <h1
                 className='hover:bg-slate-100 bg-slate-400 rounded-lg 
                 m-2 px-3 hover:cursor-pointer w-72 text-xl text-center'
                 onClick={() => {
+                  updateAnswer({variables: {
+                    assessmentAttempt: {
+                      id: assesmentAttemptId,
+                      status: "finished"
+                    },
+                    activeQuestion: null
+                  }})
                   let newAnswers = []
                   for (let i = 0; i < answers.length; i++) {
                     newAnswers.push(-1)
